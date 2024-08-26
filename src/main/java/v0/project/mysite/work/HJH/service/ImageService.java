@@ -8,28 +8,11 @@ import v0.project.mysite.work.HJH.model.Image;
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
-public class ImageService {
+public class ImageService extends BaseServiceImpl<Image, Integer>{
 
-    private final ImageMapper imageMapper;
-
-    public Image selectById(int id) {
-        return imageMapper.selectById(id);
+    public ImageService(ImageMapper imageMapper) {
+        super(imageMapper);
     }
 
-    public List<Image> selectAll() {
-        return imageMapper.selectAll();
-    }
-
-    public void insert(Image image) {
-        imageMapper.insert(image);
-    }
-
-    public void update(Image image) {
-        imageMapper.update(image);
-    }
-
-    public void delete(int id) {
-        imageMapper.delete(id);
-    }
+    // 필요시 ImageService에 특화된 메서드를 추가할 수 있습니다.
 }
