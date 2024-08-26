@@ -11,10 +11,9 @@ import java.util.List;
 @Transactional
 public class BaseServiceImpl<T, ID> implements BaseService<T, ID> {
 
-    private final BaseMapper<T, ID> baseMapper;
+    private BaseMapper<T, ID> baseMapper;
 
-    @Autowired
-    public BaseServiceImpl(BaseMapper<T, ID> baseMapper) {
+    public void assignBaseMapper(BaseMapper<T, ID> baseMapper) {
         this.baseMapper = baseMapper;
     }
 
