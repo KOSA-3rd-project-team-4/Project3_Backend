@@ -1,0 +1,35 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="v0.project.mysite.work.HJH.mapper.BaseElectronicContractsMapper">
+
+    <resultMap id="baseElectronicResultMap" type="v0.project.mysite.work.HJH.model.BaseElectronicContracts">
+        <id property="contracts_id" column="contracts_id"/>
+        <result property="type" column="type"/>
+        <result property="content" column="content"/>
+    </resultMap>
+
+    <select id="selectById" resultMap="baseElectronicResultMap">
+        SELECT * FROM BaseElectronicContracts WHERE contracts_id = #{contracts_id}
+    </select>
+
+    <select id="selectAll" resultMap="baseElectronicResultMap">
+        SELECT * FROM BaseElectronicContracts
+    </select>
+
+    <insert id="insert" parameterType="v0.project.mysite.work.HJH.model.BaseElectronicContracts">
+        INSERT INTO BaseElectronicContracts (type, content)
+        VALUES (#{type}, #{content})
+    </insert>
+
+    <update id="update" parameterType="v0.project.mysite.work.HJH.model.BaseElectronicContracts">
+        UPDATE BaseElectronicContracts
+        SET type = #{type}, content = #{content}
+        WHERE contracts_id = #{contracts_id}
+    </update>
+
+    <delete id="delete" parameterType="int">
+        DELETE FROM BaseElectronicContracts WHERE contracts_id = #{contracts_id}
+    </delete>
+</mapper>

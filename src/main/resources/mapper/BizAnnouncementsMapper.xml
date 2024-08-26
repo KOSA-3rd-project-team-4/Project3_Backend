@@ -1,0 +1,51 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="v0.project.mysite.work.HJH.mapper.BizAnnouncementMapper">
+
+    <resultMap id="BizAnnouncementResultMap" type="v0.project.mysite.work.HJH.model.BizAnnouncement">
+        <id property="announcement_id" column="announcement_id"/>
+        <result property="bizmember_id" column="bizmember_id"/>
+        <result property="title" column="title"/>
+        <result property="contents" column="contents"/>
+        <result property="salary" column="salary"/>
+
+        <result property="day_of_work" column="day_of_work"/>
+        <result property="start_work_time" column="start_work_time"/>
+        <result property="end_work_time" column="end_work_time"/>
+
+        <result property="recruit_condition" column="recruit_condition"/>
+        <result property="work_pos_latitude" column="work_pos_latitude"/>
+        <result property="work_pos_longitude" column="work_pos_longitude"/>
+        <result property="location_description" column="location_description"/>
+        <result property="announcement_finished" column="announcement_finished"/>
+
+    </resultMap>
+
+    <select id="selectById" resultMap="BizAnnouncementResultMap">
+        SELECT * FROM BizAnnouncements WHERE announcement_id = #{announcement_id}
+    </select>
+
+    <select id="selectAll" resultMap="BizAnnouncementResultMap">
+        SELECT * FROM BizAnnouncements
+    </select>
+
+    <insert id="insert" parameterType="v0.project.mysite.work.HJH.model.Image">
+        INSERT INTO BizAnnouncements (bizmember_id, title, contents, salary, day_of_work, start_work_time, end_work_time,
+                                      recruit_condition, work_pos_latitude, work_pos_longitude, location_description, announcement_finished)
+        VALUES (#{bizmember_id}, #{title}, ${contents}, ${salary}, ${day_of_work}, ${start_work_time}, ${end_work_time},
+                #{recruit_condition}, #{work_pos_latitude}, ${work_pos_longitude}, ${location_description}, ${announcement_finished})
+    </insert>
+
+    <update id="update" parameterType="v0.project.mysite.work.HJH.model.Image">
+        UPDATE BizAnnouncements
+        SET bizmember_id = #{bizmember_id}, title = #{title}, contents = #{contents}, salary = #{salary}, day_of_work = #{day_of_work}, start_work_time = #{start_work_time}, end_work_time = #{end_work_time},
+            recruit_condition = #{bizmember_id}, work_pos_latitude = #{work_pos_latitude}, work_pos_longitude = #{work_pos_longitude}, location_description = #{location_description}, announcement_finished = #{announcement_finished}
+        WHERE announcement_id = #{announcement_id}
+    </update>
+
+    <delete id="delete" parameterType="int">
+        DELETE FROM BizAnnouncements WHERE announcement_id = #{announcement_id}
+    </delete>
+</mapper>

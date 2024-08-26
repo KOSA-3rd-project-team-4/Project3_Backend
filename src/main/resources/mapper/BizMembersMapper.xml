@@ -1,0 +1,51 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="v0.project.mysite.work.HJH.mapper.BizMembersMapper">
+
+    <resultMap id="BizMembersResultMap" type="v0.project.mysite.work.HJH.model.BizMembers">
+        <id property="bizmember_id" column="bizmember_id"/>
+        <result property="username" column="username"/>
+        <result property="password" column="password"/>
+        <result property="email" column="email"/>
+        <result property="bizrno" column="bizrno"/>
+        <result property="address" column="address"/>
+        <result property="bizname" column="bizname"/>
+        <result property="call_number" column="call_number"/>
+        <result property="rating" column="rating"/>
+        <result property="base_latitude" column="base_latitude"/>
+        <result property="base_longitude" column="base_longitude"/>
+        <result property="image_id" column="image_id"/>
+        <result property="date_joined" column="date_joined"/>
+    </resultMap>
+
+    <select id="selectById" resultMap="BizMembersResultMap">
+        SELECT * FROM BizMembers WHERE bizmember_id = #{bizmember_id}
+    </select>
+
+    <select id="selectAll" resultMap="BizMembersResultMap">
+        SELECT * FROM BizMembers
+    </select>
+
+    <insert id="insert" parameterType="v0.project.mysite.work.HJH.model.BizMembers">
+        INSERT INTO BizMembers (username, password, email, bizrno, address,
+                                bizname, call_number, rating, base_latitude, base_longitude,
+                                image_id, date_joined)
+        VALUES (#{username}, #{password}, ${email}, ${bizrno}, ${address},
+                #{bizname}, #{call_number}, ${rating}, ${base_latitude}, ${base_longitude},
+                #{image_id}, #{date_joined})
+    </insert>
+
+    <update id="update" parameterType="v0.project.mysite.work.HJH.model.BizMembers">
+        UPDATE BizMembers
+        SET username = #{username}, password = #{password}, email = #{email}, bizrno = #{bizrno}, address = #{address},
+            bizname = #{bizname}, call_number = #{call_number}, rating = #{rating}, base_latitude = #{base_latitude}, base_longitude = #{base_longitude},
+            image_id = #{image_id}, date_joined = #{date_joined}
+        WHERE bizmember_id = #{bizmember_id}
+    </update>
+
+    <delete id="delete" parameterType="int">
+        DELETE FROM BizMembers WHERE bizmember_id = #{bizmember_id}
+    </delete>
+</mapper>
