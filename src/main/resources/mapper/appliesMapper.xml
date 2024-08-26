@@ -1,0 +1,38 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="v0.project.mysite.work.HJH.mapper.AppliesMapper">
+
+    <resultMap id="AppliesResultMap" type="v0.project.mysite.work.HJH.model.Applies">
+        <id property="apply_id" column="apply_id"/>
+        <result property="member_id" column="member_id"/>
+        <result property="announcement_id" column="announcement_id"/>
+        <result property="chat_created" column="chat_created"/>
+        <result property="user_hired" column="user_hired"/>
+        <result property="apply_date" column="apply_date"/>
+    </resultMap>
+
+    <select id="selectById" resultMap="AppliesResultMap">
+        SELECT * FROM applies WHERE apply_id = #{apply_id}
+    </select>
+
+    <select id="selectAll" resultMap="AppliesResultMap">
+        SELECT * FROM applies
+    </select>
+
+    <insert id="insert" parameterType="v0.project.mysite.work.HJH.model.Applies">
+        INSERT INTO applies (member_id, announcement_id, chat_created, user_hired, apply_date)
+        VALUES (#{member_id}, #{announcement_id}, ${chat_created}, ${user_hired}, ${apply_date})
+    </insert>
+
+    <update id="update" parameterType="v0.project.mysite.work.HJH.model.Applies">
+        UPDATE applies
+        SET member_id = #{member_id}, announcement_id = #{announcement_id}, chat_created = #{chat_created}, user_hired = #{user_hired}, apply_date = #{apply_date}
+        WHERE apply_id = #{apply_id}
+    </update>
+
+    <delete id="delete" parameterType="int">
+        DELETE FROM applies WHERE apply_id = #{apply_id}
+    </delete>
+</mapper>
