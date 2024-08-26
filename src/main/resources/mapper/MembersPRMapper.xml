@@ -1,0 +1,39 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="v0.project.mysite.work.HJH.mapper.MembersPRMapper">
+
+    <resultMap id="MemberPRResultmap" type="v0.project.mysite.work.HJH.model.MembersPR">
+        <id property="pr_id" column="pr_id"/>
+        <result property="member_id" column="member_id"/>
+        <result property="title" column="title"/>
+        <result property="start_time" column="start_time"/>
+        <result property="end_time" column="end_time"/>
+        <result property="contents" column="contents"/>
+        <result property="display" column="display"/>
+    </resultMap>
+
+    <select id="selectById" resultMap="MemberPRResultmap">
+        SELECT * FROM Members_PR WHERE pr_id = #{pr_id}
+    </select>
+
+    <select id="selectAll" resultMap="MemberPRResultmap">
+        SELECT * FROM Members_PR
+    </select>
+
+    <insert id="insert" parameterType="v0.project.mysite.work.HJH.model.MembersPR">
+        INSERT INTO Members_PR (member_id, title, start_time, end_time, contents, display)
+        VALUES (#{member_id}, #{title}, ${start_time}, ${end_time}, ${contents}, ${display})
+    </insert>
+
+    <update id="update" parameterType="v0.project.mysite.work.HJH.model.MembersPR">
+        UPDATE Members_PR
+        SET member_id = #{member_id}, title = #{title}, start_time = #{start_time}, end_time = #{end_time}, contents = #{contents}, display = #{display}
+        WHERE pr_id = #{pr_id}
+    </update>
+
+    <delete id="delete" parameterType="int">
+        DELETE FROM Members_PR WHERE pr_id = #{pr_id}
+    </delete>
+</mapper>
