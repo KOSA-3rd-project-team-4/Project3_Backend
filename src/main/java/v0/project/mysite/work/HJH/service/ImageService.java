@@ -13,23 +13,23 @@ public class ImageService {
 
     private final ImageMapper imageMapper;
 
-    public Image selectImageById(int id) {
+    public Image selectById(int id) {
         return imageMapper.selectById(id);
     }
 
-    public List<Image> selectAllImage() {
+    public List<Image> selectAll() {
         return imageMapper.selectAll();
     }
 
-    public void insertImage(Image image) {
+    public void insert(Image image) {
         imageMapper.insert(image);
     }
 
-    public void updateImage(Image image) {
+    public void update(Image image) {
         imageMapper.update(image);
     }
 
-    public void deleteImage(int id) {
+    public void delete(int id) {
         imageMapper.delete(id);
     }
 }

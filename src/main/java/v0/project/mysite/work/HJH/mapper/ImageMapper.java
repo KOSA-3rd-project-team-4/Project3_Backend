@@ -6,7 +6,7 @@ import v0.project.mysite.work.HJH.model.Image;
 import java.util.List;
 
 @Mapper
-public interface ImageMapper {
+public interface ImageMapper{
 
     Image selectById(int id);
 

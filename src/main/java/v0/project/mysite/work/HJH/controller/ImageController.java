@@ -16,27 +16,27 @@ public class ImageController {
 
     @GetMapping("/select/{id}")
     public Image getImageById(@PathVariable int id) {
-        return imageService.selectImageById(id);
+        return imageService.selectById(id);
     }
 
     @GetMapping("/select/all")
     public List<Image> selectAll() {
-        return imageService.selectAllImage();
+        return imageService.selectAll();
     }
 
     @PostMapping("/insert")
     public void createImage(@RequestBody Image image) {
-        imageService.insertImage(image);
+        imageService.insert(image);
     }
 
     @PutMapping("/update/{id}")
     public void updateImage(@PathVariable int id, @RequestBody Image image) {
         image.setImage_id(id);
-        imageService.updateImage(image);
+        imageService.update(image);
     }
 
     @DeleteMapping("/delete/{id}")
     public void deleteImage(@PathVariable int id) {
-        imageService.deleteImage(id);
+        imageService.delete(id);
     }
 }
