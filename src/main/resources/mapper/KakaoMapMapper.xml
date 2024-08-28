@@ -1,0 +1,21 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="v0.project.mysite.kakao.map.api.dao.KakaoMapMapper">
+
+    <resultMap id="locationResultMap" type="v0.project.mysite.kakao.map.api.dto.MarkerLocationResponseDTO">
+        <id property="announcementId" column="announcement_id"/>
+        <result property="latitude" column="work_pos_latitude"/>
+        <result property="longitude" column="work_pos_longitude"/>
+    </resultMap>
+
+    <select id="findMarkersByRange" parameterType="v0.project.mysite.kakao.map.api.dto.MarkerLocationRequestDTO" resultMap="locationResultMap"><![CDATA[
+        SELECT work_pos_latitude, work_pos_longitude
+        FROM BizAnnouncements
+        WHERE work_pos_latitude < #{fromLatitude}
+        AND work_pos_latitude > #{toLatitude}
+        AND work_pos_longitude > #{fromLongitude}
+        AND work_pos_longitude < #{toLongitude}
+    ]]></select>
+</mapper>
