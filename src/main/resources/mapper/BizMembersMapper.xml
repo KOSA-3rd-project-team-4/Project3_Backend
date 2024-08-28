@@ -32,8 +32,8 @@
         INSERT INTO BizMembers (username, password, email, bizrno, address,
                                 bizname, call_number, rating, base_latitude, base_longitude,
                                 image_id, date_joined)
-        VALUES (#{username}, #{password}, ${email}, ${bizrno}, ${address},
-                #{bizname}, #{call_number}, ${rating}, ${base_latitude}, ${base_longitude},
+        VALUES (#{username}, #{password}, #{email}, #{bizrno}, #{address},
+                #{bizname}, #{call_number}, #{rating}, #{base_latitude}, #{base_longitude},
                 #{image_id}, #{date_joined})
     </insert>
 

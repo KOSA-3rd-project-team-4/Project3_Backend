@@ -21,7 +21,7 @@ public class UserService implements IUserService {
     IUserRepository userRepository;
 
     @Override
-    public TestBiz getBizMembers(Authentication authentication) {
+    public BizMembers getBizMembers(Authentication authentication) {
         Object principal = authentication.getPrincipal();
         String username =null;
         if(principal instanceof UserDetails) {

@@ -13,7 +13,7 @@ public class BizMembers {
     private String username;
     private String password;
     private String email;
-    private int bizrno;
+    private Long bizrno;
     private String address;
     private String bizname;
     private String call_number;

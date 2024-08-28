@@ -6,6 +6,6 @@ import v0.project.mysite.work.HJH.model.BizMembers;
 
 @Mapper
 public interface IUserRepository {
-    TestBiz getBizMember(String query);
+    BizMembers getBizMember(String query);
     void insertUser(TestBiz testBiz);
 }
