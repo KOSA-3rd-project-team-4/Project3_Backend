@@ -9,15 +9,15 @@ import java.sql.Timestamp;
 @Data
 @Getter @Setter
 public class ViewBizMembersApplies {
-    private String announcement;
-    private String nick_name;
-    private String image_url;
-    private String userprofile;
-
     private int apply_id;
     private int member_id;
     private int announcement_id;
     private int chat_created;
     private int user_hired;
     private Timestamp apply_date;
+
+    private String announcement;
+    private String nick_name;
+    private String image_url;
+    private String userprofile;
 }
