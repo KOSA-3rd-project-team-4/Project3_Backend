@@ -21,17 +21,16 @@ import v0.project.mysite.work.HJH.model.BizMembers;
 @Log4j2
 public class UserController {
 
-    private final UserService userService;
     private final IUserRepository userRepository;
 
     @GetMapping("/api/user")
-    public ResponseEntity<TestBiz> getUserInfo() {
+    public ResponseEntity<BizMembers> getUserInfo() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         log.info(authentication);
         if (authentication != null && authentication.isAuthenticated()) {
             Object principal = authentication.getPrincipal();
             UserDetails user = (UserDetails) principal;
-            TestBiz userInfo = userRepository.getBizMember(user.getUsername());
+            BizMembers userInfo = userRepository.getBizMember(user.getUsername());
             log.info(userInfo.getUsername());
             return ResponseEntity.ok(userInfo);
             //return userInfo;

@@ -29,7 +29,7 @@ public class UserLocalService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         log.info("Loading user by username: {}", username);
-        TestBiz user = userRepository.getBizMember(username);
+        BizMembers user = userRepository.getBizMember(username);
         if (user == null) {
             throw new UsernameNotFoundException("User not found with username: " + username);
         }

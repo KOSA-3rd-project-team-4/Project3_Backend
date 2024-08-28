@@ -16,4 +16,5 @@ public class MembersPR {
     private Timestamp end_time;
     private String contents;
     private int display;
+    private Members member;
 }
