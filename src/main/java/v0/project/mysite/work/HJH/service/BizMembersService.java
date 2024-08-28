@@ -17,5 +17,6 @@ public class BizMembersService extends BaseServiceImpl<BizMembers, Integer>{
         assignBaseMapper(this.bizMembersMapper);
     }
 
+
     // 필요시 ImageService에 특화된 메서드를 추가할 수 있습니다.
 }
