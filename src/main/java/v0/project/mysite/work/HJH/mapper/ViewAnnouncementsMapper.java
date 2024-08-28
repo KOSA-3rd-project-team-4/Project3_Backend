@@ -13,4 +13,6 @@ public interface ViewAnnouncementsMapper{
 
     List<ViewAnnouncement> selectAll();
 
+    ViewAnnouncement selectById(int id);
+
 }

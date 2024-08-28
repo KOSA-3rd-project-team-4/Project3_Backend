@@ -20,4 +20,8 @@ public class ViewAnnouncementsService{
     public List<ViewAnnouncement> selectAll() {
         return this.vaMapper.selectAll();
     }
+
+    public ViewAnnouncement selectById(int id) {
+        return this.vaMapper.selectById(id);
+    }
 }

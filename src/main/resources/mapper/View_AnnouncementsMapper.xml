@@ -33,4 +33,13 @@
             inner join project3.Images i
                 on bm.image_id = i.image_id
     </select>
+
+    <select id="selectById" resultMap="ViewAnnouncementResultMap">
+        select ba.*, bm.bizname, i.image_url from project3.BizAnnouncements ba
+            inner join project3.BizMembers bm
+                on ba.bizmember_id = bm.bizmember_id
+            inner join project3.Images i
+                on bm.image_id = i.image_id
+        where ba.announcement_id = #{announcement_id}
+    </select>
 </mapper>
