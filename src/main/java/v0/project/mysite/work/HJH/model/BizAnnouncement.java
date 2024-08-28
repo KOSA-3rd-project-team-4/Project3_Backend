@@ -18,8 +18,8 @@ public class BizAnnouncement {
     private Timestamp start_work_time;
     private Timestamp end_work_time;
     private String recruit_condition;
-    private float work_pos_latitude;
-    private float work_pos_longitude;
+    private double work_pos_latitude;
+    private double work_pos_longitude;
     private String location_description;
     private int announcement_finished;
 }
