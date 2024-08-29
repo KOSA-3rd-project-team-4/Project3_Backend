@@ -49,4 +49,17 @@ public class AppliesController {
         appliesService.delete(id);
         return ResponseEntity.noContent().build();
     }
+
+    @PutMapping("/update/chat/{chat_created}/{id}")
+    public ResponseEntity<Void> updateChat(@PathVariable int chat_created, @PathVariable int id) {
+        appliesService.updateChatCreated(chat_created, id);
+//        System.out.println(chat_created + " " + id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/update/hired/{user_hired}/{id}")
+    public ResponseEntity<Void> updateHired(@PathVariable int user_hired, @PathVariable int id) {
+        appliesService.updateUserHired(user_hired, id);
+        return ResponseEntity.noContent().build();
+    }
 }
