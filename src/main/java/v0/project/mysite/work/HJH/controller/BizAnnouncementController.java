@@ -50,13 +50,19 @@ public class BizAnnouncementController {
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> delete(@PathVariable int id) {
-        bizAnnouncementService.delete(id);
+        bizAnnouncementService.deleteAnnouncement(id);
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/select/user")
-    public ResponseEntity<List<BizAnnouncement>> selectUser() {
-        List<BizAnnouncement> images = bizAnnouncementService.selectUser();
+    @GetMapping("/select/user/{id}")
+    public ResponseEntity<List<BizAnnouncement>> selectUser(@PathVariable int id) {
+        List<BizAnnouncement> images = bizAnnouncementService.selectUser(id);
+        return ResponseEntity.ok(images);
+    }
+
+    @GetMapping("/select/muser/{id}")
+    public ResponseEntity<List<BizAnnouncement>> selectMUser(@PathVariable int id) {
+        List<BizAnnouncement> images = bizAnnouncementService.selectMUser(id);
         return ResponseEntity.ok(images);
     }
 

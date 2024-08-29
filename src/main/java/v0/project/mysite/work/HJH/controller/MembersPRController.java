@@ -55,9 +55,9 @@ public class MembersPRController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/select/user")
-    public ResponseEntity<List<NewMembersPR>> selectUser() {
-        List<NewMembersPR> membersPR = membersPRService.selectUser();
+    @GetMapping("/select/user/{id}")
+    public ResponseEntity<List<NewMembersPR>> selectUser(@PathVariable int id) {
+        List<NewMembersPR> membersPR = membersPRService.selectUser(id);
         return ResponseEntity.ok(membersPR);
     }
 }

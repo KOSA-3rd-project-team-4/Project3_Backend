@@ -52,7 +52,27 @@
         DELETE FROM BizAnnouncements WHERE announcement_id = #{announcement_id}
     </delete>
 
+    <delete id="deleteFromTagLists" parameterType="int">
+        DELETE FROM TagLists WHERE announcement_id = #{announcement_id}
+    </delete>
+
+    <delete id="deleteFromApplies" parameterType="int">
+        DELETE FROM applies WHERE announcement_id = #{announcement_id}
+    </delete>
+
+    <delete id="deleteFromBizAnnouncements" parameterType="int">
+        DELETE FROM BizAnnouncements WHERE announcement_id = #{announcement_id};
+    </delete>
+
     <select id="selectUser" resultMap="BizAnnouncementResultMap">
         SELECT * FROM BizAnnouncements WHERE bizmember_id = #{bizmember_id}
     </select>
+
+    <select id="selectJobsByMemberId" resultMap="BizAnnouncementResultMap">
+        SELECT j.*
+        FROM BizAnnouncements j
+                 JOIN applies a ON j.announcement_id = a.announcement_id
+        WHERE a.member_id = #{member_id};
+    </select>
+
 </mapper>
