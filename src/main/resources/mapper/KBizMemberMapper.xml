@@ -26,14 +26,18 @@
         <result property="password" column="password"/>
     </resultMap>
 
-    <select id="getBizMember" resultMap="TestBiz">
-        SELECT * FROM TestBiz WHERE username = #{query}
+    <select id="getBizMember" resultMap="BizMembersResultMap">
+        SELECT * FROM BizMembers WHERE username = #{query}
     </select>
 
-    <insert id="insertUser" parameterType="v0.project.mysite.KBC.DTO.TestBiz">
-        INSERT INTO TestBiz (id, username, password)
-        VALUES (#{id}, #{username}, #{password})
-    </insert>
+    <select id="selectAll" resultMap="BizMembersResultMap">
+        SELECT * FROM BizMembers
+    </select>
+
+<!--    <insert id="insertUser" parameterType="v0.project.mysite.KBC.DTO.TestBiz">-->
+<!--        INSERT INTO TestBiz (id, username, password)-->
+<!--        VALUES (#{id}, #{username}, #{password})-->
+<!--    </insert>-->
 
 
 </mapper>
