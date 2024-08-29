@@ -3,8 +3,8 @@ package v0.project.mysite.kakao.map.api.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import v0.project.mysite.kakao.map.api.dao.KakaoMapMapper;
-import v0.project.mysite.kakao.map.api.dto.MarkerLocationRequestDTO;
-import v0.project.mysite.kakao.map.api.dto.MarkerLocationResponseDTO;
+import v0.project.mysite.kakao.map.api.dto.AnnouncementRequestDTO;
+import v0.project.mysite.kakao.map.api.dto.AnnouncementResponseDTO;
 import v0.project.mysite.kakao.map.api.dto.RangeCalculateRequestDTO;
 
 import java.util.List;
@@ -20,17 +20,24 @@ public class KakaoMapService {
     // 반경 (단위: km)
     private static final double RADIUS_KM = 5.0;
 
-    public List<MarkerLocationResponseDTO> getMarkerLocationByRange(RangeCalculateRequestDTO rangeCalculateRequestDTO) {
-        MarkerLocationRequestDTO markerLocationRequestDTO = calculateRange(rangeCalculateRequestDTO);
-        return mapper.findMarkersByRange(markerLocationRequestDTO).stream()
-                .map(e -> MarkerLocationResponseDTO.builder()
+    public List<AnnouncementResponseDTO> getAnnouncementsByRange(RangeCalculateRequestDTO rangeCalculateRequestDTO) {
+        AnnouncementRequestDTO announcementRequestDTO = calculateRange(rangeCalculateRequestDTO);
+        return mapper.findAnnouncementsByRange(announcementRequestDTO).stream()
+                .map(e -> AnnouncementResponseDTO.builder()
+                        .announcementId(e.getAnnouncement_id())
+                        .title(e.getTitle())
+                        .contents(e.getContents())
+                        .salary(e.getSalary())
+                        .dayOfWork(e.getDay_of_work().toLocalDateTime().toLocalDate())
+                        .startWorkTime(e.getStart_work_time().toLocalDateTime().toLocalTime())
+                        .endWorkTime(e.getEnd_work_time().toLocalDateTime().toLocalTime())
                         .latitude(e.getWork_pos_latitude())
                         .longitude(e.getWork_pos_longitude())
                         .build())
                 .toList();
     }
 
-    private MarkerLocationRequestDTO calculateRange(RangeCalculateRequestDTO dto) {
+    private AnnouncementRequestDTO calculateRange(RangeCalculateRequestDTO dto) {
         double lat = dto.getLatitude();
         double lng = dto.getLongitude();
         double latRad = Math.toRadians(lat);
@@ -55,7 +62,7 @@ public class KakaoMapService {
         System.out.println("minLat = " + minLat);
         System.out.println("maxLat = " + maxLat);
 
-        return MarkerLocationRequestDTO.builder()
+        return AnnouncementRequestDTO.builder()
                 .fromLatitude(minLat)
                 .fromLongitude(minLng)
                 .toLatitude(maxLat)
