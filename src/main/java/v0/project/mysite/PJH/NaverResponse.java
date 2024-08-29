@@ -1,12 +1,13 @@
 package v0.project.mysite.PJH;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class NaverResponse implements OAuth2Response {
     private final Map<String, Object> attribute;
 
     public NaverResponse(Map<String, Object> attribute) {
-        this.attribute = (Map<String, Object>) attribute.get("response");
+        this.attribute = (Map<String, Object>) attribute.getOrDefault("response", new HashMap<>());
     }
 
     @Override
@@ -30,7 +31,7 @@ public class NaverResponse implements OAuth2Response {
     }
 
     @Override
-    public String getNickname() {
-        return attribute.get("nickname") != null ? attribute.get("nickname").toString() : null;
+    public Map<String, Object> getAttributes() {
+        return attribute;
     }
 }

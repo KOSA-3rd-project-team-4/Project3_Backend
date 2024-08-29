@@ -15,27 +15,59 @@ import org.springframework.web.bind.annotation.*;
 import v0.project.mysite.KBC.DTO.TestBiz;
 import v0.project.mysite.KBC.repository.IUserRepository;
 import v0.project.mysite.KBC.service.UserService;
+import v0.project.mysite.work.HJH.mapper.MembersMapper;
 import v0.project.mysite.work.HJH.model.BizMembers;
+import v0.project.mysite.work.HJH.model.Members;
+import v0.project.mysite.work.HJH.service.MembersService;
 
 @RestController
 @RequiredArgsConstructor
 @Log4j2
 public class UserController {
 
-    private final UserService userService;
     private final IUserRepository userRepository;
+    private final MembersMapper membersMapper;
 
     @GetMapping("/api/user")
-    public ResponseEntity<BizMembers> getUserInfo() {
+    public ResponseEntity<?> getUserInfo() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        log.info(authentication);
+        log.info("Authentication object: {}", authentication);
+
         if (authentication != null && authentication.isAuthenticated()) {
             Object principal = authentication.getPrincipal();
-            UserDetails user = (UserDetails) principal;
-            BizMembers userInfo = userRepository.getBizMember(user.getUsername());
-            log.info(userInfo.getUsername());
-            return ResponseEntity.ok(userInfo);
-            //return userInfo;
+
+            // OAuth2 로그인 처리
+            if (principal instanceof OAuth2User) {
+                OAuth2User oAuth2User = (OAuth2User) principal;
+                String username = oAuth2User.getAttribute("name"); // OAuth2User에서 이름을 가져옴
+                log.info("OAuth2 username: {}", username);
+
+                if (username != null) {
+                    Members existingMember = membersMapper.selectByUsername(username);
+                    log.info("Fetched Member: {}", existingMember);
+
+                    if (existingMember != null) {
+                        return ResponseEntity.ok(existingMember);
+                    } else {
+                        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+                    }
+                }
+
+                // 일반 로그인 처리
+            } else if (principal instanceof UserDetails) {
+                UserDetails userDetails = (UserDetails) principal;
+                String username = userDetails.getUsername();
+                log.info("UserDetails username: {}", username);
+
+                BizMembers userInfo = userRepository.getBizMember(username);
+                log.info("Fetched BizMember: {}", userInfo);
+
+                if (userInfo != null) {
+                    return ResponseEntity.ok(userInfo);
+                } else {
+                    return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+                }
+            }
         }
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }

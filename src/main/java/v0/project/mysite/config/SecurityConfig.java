@@ -33,7 +33,6 @@ public class SecurityConfig {
     private final CustomOAuth2UserService customOAuth2UserService;
 //    private final UserDetailsService userDetailsService;
     private final AuthenticationConfiguration authenticationConfiguration;
-    private final CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
 
 
     @Bean
@@ -58,9 +57,8 @@ public class SecurityConfig {
                         .failureHandler(new CustomAuthenticationFailureHandler())) // 로그인 실패 시 CustomAuthenticationFailureHandler 사용
 
                 .oauth2Login(oauth2Login -> oauth2Login
-                        .successHandler(customAuthenticationSuccessHandler)
                         .defaultSuccessUrl("http://localhost:5173/", true)
-                        .failureUrl("/login?error")
+//                        .failureUrl("/login?error")
                         .userInfoEndpoint(userInfoEndpoint ->
                                 userInfoEndpoint.userService(customOAuth2UserService))
                 )
@@ -68,7 +66,7 @@ public class SecurityConfig {
                         .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                         .logoutSuccessUrl("/login")
                         .invalidateHttpSession(true)
-
+                        .deleteCookies("JSESSIONID")
                 );
 
         return http.build();

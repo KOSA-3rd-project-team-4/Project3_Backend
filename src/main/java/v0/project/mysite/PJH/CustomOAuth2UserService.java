@@ -26,14 +26,17 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         log.info("oAuth2User Attributes: {}", oAuth2User.getAttributes());
 
         String registrationId = userRequest.getClientRegistration().getRegistrationId();
-        OAuth2Response oAuth2Response;
+        log.info("registrationId: {}", registrationId);
+        OAuth2Response oAuth2Response = null;
         if ("naver".equals(registrationId)) {
             oAuth2Response = new NaverResponse(oAuth2User.getAttributes());
+            log.info("oAuth2Response: {}", oAuth2Response);
         } else {
             throw new OAuth2AuthenticationException("Unsupported OAuth2 provider");
         }
 
         Members existingMember = membersMapper.selectByUsername(oAuth2Response.getName());
+        log.info("oAuth2Response.getName(): {}", oAuth2Response.getName());
 
         String role = "ROLE_USER";
         if (existingMember == null) {
@@ -47,12 +50,6 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
             existingMember.setNick_name(oAuth2Response.getName());
             membersMapper.update(existingMember);
         }
-
-        // OAuth2User 생성
-        CustomOAuth2User customOAuth2User = new CustomOAuth2User(oAuth2Response, role);
-
-        // 로그 추가: SecurityContextHolder에 저장된 인증 정보 확인
-
 
         return new CustomOAuth2User(oAuth2Response, role);
     }
