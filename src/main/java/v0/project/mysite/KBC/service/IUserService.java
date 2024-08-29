@@ -5,5 +5,5 @@ import v0.project.mysite.KBC.DTO.TestBiz;
 import v0.project.mysite.work.HJH.model.BizMembers;
 
 public interface IUserService {
-   TestBiz getBizMembers(Authentication authentication);
+   BizMembers getBizMembers(Authentication authentication);
 }
