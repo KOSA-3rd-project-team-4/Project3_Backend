@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Data
 @Getter @Setter
@@ -14,9 +16,9 @@ public class BizAnnouncement {
     private String title;
     private String contents;
     private float salary;
-    private Timestamp day_of_work;
-    private Timestamp start_work_time;
-    private Timestamp end_work_time;
+    private LocalDate day_of_work;
+    private LocalTime start_work_time;
+    private LocalTime end_work_time;
     private String recruit_condition;
     private double work_pos_latitude;
     private double work_pos_longitude;

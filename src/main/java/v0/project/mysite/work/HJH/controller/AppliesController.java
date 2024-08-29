@@ -34,7 +34,7 @@ public class AppliesController {
     @PostMapping("/insert")
     public ResponseEntity<Applies> insert(@RequestBody Applies image) {
         appliesService.insert(image);
-        return ResponseEntity.status(201).body(image);
+        return ResponseEntity.status(200).body(image);
     }
 
     @PutMapping("/update/{id}")
