@@ -8,11 +8,13 @@ import java.sql.Timestamp;
 
 @Data
 @Getter @Setter
-public class ChatLogs {
+public class ViewChat {
     private int chat_log_id;
     private int contract_chat_id;
-    private Integer sent_by_member_id;
-    private Integer sent_by_biz_member_id;
+    private String sender_name;
     private String content;
     private Timestamp chat_time;
+
+    private Integer sent_by_member_id;
+    private Integer sent_by_biz_member_id;
 }

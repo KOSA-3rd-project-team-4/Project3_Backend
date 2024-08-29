@@ -1,0 +1,45 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="v0.project.mysite.work.HJH.mapper.ViewAnnouncementsMapper">
+
+    <resultMap id="ViewAnnouncementResultMap" type="v0.project.mysite.work.HJH.model.ViewAnnouncement">
+        <id property="announcement_id" column="announcement_id"/>
+        <result property="bizmember_id" column="bizmember_id"/>
+        <result property="title" column="title"/>
+        <result property="contents" column="contents"/>
+        <result property="salary" column="salary"/>
+
+        <result property="day_of_work" column="day_of_work"/>
+        <result property="start_work_time" column="start_work_time"/>
+        <result property="end_work_time" column="end_work_time"/>
+
+        <result property="recruit_condition" column="recruit_condition"/>
+        <result property="work_pos_latitude" column="work_pos_latitude"/>
+        <result property="work_pos_longitude" column="work_pos_longitude"/>
+        <result property="location_description" column="location_description"/>
+        <result property="announcement_finished" column="announcement_finished"/>
+
+        <result property="bizname" column="bizname"/>
+        <result property="image_url" column="image_url"/>
+
+    </resultMap>
+
+    <select id="selectAll" resultMap="ViewAnnouncementResultMap">
+        select ba.*, bm.bizname, i.image_url from project3.BizAnnouncements ba
+            inner join project3.BizMembers bm
+                on ba.bizmember_id = bm.bizmember_id
+            inner join project3.Images i
+                on bm.image_id = i.image_id
+    </select>
+
+    <select id="selectById" resultMap="ViewAnnouncementResultMap">
+        select ba.*, bm.bizname, i.image_url from project3.BizAnnouncements ba
+            inner join project3.BizMembers bm
+                on ba.bizmember_id = bm.bizmember_id
+            inner join project3.Images i
+                on bm.image_id = i.image_id
+        where ba.announcement_id = #{announcement_id}
+    </select>
+</mapper>

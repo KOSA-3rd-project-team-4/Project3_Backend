@@ -1,0 +1,32 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="v0.project.mysite.work.HJH.mapper.ViewChatMapper">
+
+    <resultMap id="ViewChatResultMap" type="v0.project.mysite.work.HJH.model.ViewChat">
+        <id property="chat_log_id" column="chat_log_id"/>
+        <result property="contract_chat_id" column="contract_chat_id"/>
+        <result property="sender_name" column="sender_name"/>
+        <result property="content" column="content"/>
+        <result property="chat_time" column="chat_time"/>
+
+        <result property="sent_by_member_id" column="sent_by_member_id"/>
+        <result property="sent_by_biz_member_id" column="sent_by_biz_member_id"/>
+
+    </resultMap>
+
+    <select id="selectById" resultMap="ViewChatResultMap">
+        SELECT cl.chat_log_id,
+               cl.contract_chat_id,
+               COALESCE(m.nick_name, bm.username) AS sender_name,
+               cl.content,
+               cl.chat_time,
+               cl.sent_by_member_id,
+               cl.sent_by_biz_member_id
+        FROM ChatLogs cl
+                 LEFT JOIN Members m ON cl.sent_by_member_id = m.member_id
+                 LEFT JOIN BizMembers bm ON cl.sent_by_biz_member_id = bm.bizmember_id
+        WHERE cl.contract_chat_id = #{id};
+    </select>
+</mapper>
