@@ -16,4 +16,5 @@ public interface BizMembersMapper extends BaseMapper<BizMembers, Integer>{
     @Select("SELECT * FROM BizMembers WHERE username = #{username}")
     BizMembers findByUsername(String username);
 
+
 }
