@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import v0.project.mysite.kakao.map.api.dto.MarkerLocationResponseDTO;
+import v0.project.mysite.kakao.map.api.dto.AnnouncementResponseDTO;
 import v0.project.mysite.kakao.map.api.dto.RangeCalculateRequestDTO;
 import v0.project.mysite.kakao.map.api.service.KakaoMapService;
 
@@ -22,13 +22,13 @@ public class KakaoMapController {
     @GetMapping("/location")
     public ResponseEntity<Map<String, Object>> getLocations(RangeCalculateRequestDTO dto) {
         Map<String, Object> resultMap = new HashMap<>();
-        List<MarkerLocationResponseDTO> markerLocations = kakaoMapService.getMarkerLocationByRange(dto);
-        if (markerLocations.isEmpty()) {
+        List<AnnouncementResponseDTO> markerInfoList = kakaoMapService.getAnnouncementsByRange(dto);
+        if (markerInfoList.isEmpty()) {
             resultMap.put("success", false);
             return ResponseEntity.status(204).body(resultMap);
         }
         resultMap.put("success", true);
-        resultMap.put("markerLocations", markerLocations);
+        resultMap.put("markerInfoList", markerInfoList);
 
         return ResponseEntity.ok(resultMap);
     }

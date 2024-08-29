@@ -4,7 +4,7 @@ import lombok.*;
 
 @Data
 @Builder
-public class MarkerLocationRequestDTO {
+public class AnnouncementRequestDTO {
     private Double fromLatitude;
     private Double fromLongitude;
     private Double toLatitude;
