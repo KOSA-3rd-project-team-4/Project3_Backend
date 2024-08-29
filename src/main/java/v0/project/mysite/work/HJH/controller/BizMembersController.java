@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import v0.project.mysite.work.HJH.mapper.BizMembersMapper;
 import v0.project.mysite.work.HJH.model.BizMembers;
 import v0.project.mysite.work.HJH.model.Image;
+import v0.project.mysite.work.HJH.service.BizMembersService;
 import v0.project.mysite.work.HJH.service.ImageService;
 
 import java.util.List;
@@ -14,9 +15,11 @@ import java.util.List;
 public class BizMembersController {
 
     private final BizMembersMapper bizMembersMapper;
+    private final BizMembersService bizMembersService;
 
-    public BizMembersController(BizMembersMapper bizMembersMapper) {
+    public BizMembersController(BizMembersMapper bizMembersMapper, BizMembersService bizMembersService) {
         this.bizMembersMapper = bizMembersMapper;
+        this.bizMembersService = bizMembersService;
     }
 
     @GetMapping("/select/{id}")
@@ -40,7 +43,7 @@ public class BizMembersController {
     @PutMapping("/update/{id}")
     public ResponseEntity<Void> update(@PathVariable int id, @RequestBody BizMembers image) {
         image.setBizmember_id(id);
-        bizMembersMapper.update(image);
+        bizMembersService.update(image);
         return ResponseEntity.noContent().build();
     }
 

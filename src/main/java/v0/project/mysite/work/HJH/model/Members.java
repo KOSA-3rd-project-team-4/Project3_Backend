@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
 
 @Data
 @Getter @Setter
@@ -15,5 +16,5 @@ public class Members {
     private String email;
     private int image_id;
     private int email_verified;
-    private Timestamp edit_date;
+    private LocalDate edit_date;
 }
