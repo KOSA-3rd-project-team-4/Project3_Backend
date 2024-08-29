@@ -35,4 +35,16 @@
     <delete id="delete" parameterType="int">
         DELETE FROM applies WHERE apply_id = #{apply_id}
     </delete>
+
+    <update id="updateChatCreated" parameterType="v0.project.mysite.work.HJH.model.Applies">
+        UPDATE applies
+        SET chat_created = #{chat_created}
+        WHERE apply_id = #{apply_id}
+    </update>
+
+    <update id="updateUserHired" parameterType="v0.project.mysite.work.HJH.model.Applies">
+        UPDATE applies
+        SET user_hired = #{user_hired}
+        WHERE apply_id = #{apply_id}
+    </update>
 </mapper>

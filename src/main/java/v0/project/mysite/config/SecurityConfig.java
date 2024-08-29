@@ -1,49 +1,39 @@
 package v0.project.mysite.config;
 
 
-import jakarta.servlet.FilterChain;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import v0.project.mysite.KBC.service.CustomAuthenticationFailureHandler;
-import v0.project.mysite.KBC.service.UserLocalService;
-import v0.project.mysite.KBC.service.UserService;
-
-import java.io.IOException;
+import v0.project.mysite.PJH.CustomAuthenticationSuccessHandler;
+import v0.project.mysite.PJH.CustomOAuth2UserService;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
 
-
+@RequiredArgsConstructor
 @Configuration
 @EnableWebSecurity
 @Log4j2
 public class SecurityConfig {
 
-    private final UserDetailsService userDetailsService;
+    private final CustomOAuth2UserService customOAuth2UserService;
+//    private final UserDetailsService userDetailsService;
     private final AuthenticationConfiguration authenticationConfiguration;
 
-    public SecurityConfig(UserDetailsService userDetailsService, AuthenticationConfiguration authenticationConfiguration) {
-        this.userDetailsService = userDetailsService;
-        this.authenticationConfiguration = authenticationConfiguration;
-    }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -65,10 +55,18 @@ public class SecurityConfig {
                         .passwordParameter("password")  // Vue.js에서 보낼 패스워드 파라미터 이름
                         .defaultSuccessUrl("/", true)
                         .failureHandler(new CustomAuthenticationFailureHandler())) // 로그인 실패 시 CustomAuthenticationFailureHandler 사용
+
+                .oauth2Login(oauth2Login -> oauth2Login
+                        .defaultSuccessUrl("http://localhost:5173/", true)
+//                        .failureUrl("/login?error")
+                        .userInfoEndpoint(userInfoEndpoint ->
+                                userInfoEndpoint.userService(customOAuth2UserService))
+                )
                 .logout(logout -> logout
                         .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                         .logoutSuccessUrl("/login")
                         .invalidateHttpSession(true)
+                        .deleteCookies("JSESSIONID")
                 );
 
         return http.build();
@@ -83,7 +81,5 @@ public class SecurityConfig {
     public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
-
-
 
 }
