@@ -7,6 +7,9 @@ import v0.project.mysite.work.HJH.model.Image;
 import v0.project.mysite.work.HJH.service.ChatLogsService;
 import v0.project.mysite.work.HJH.service.ImageService;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -32,9 +35,12 @@ public class ChatLogsController {
     }
 
     @PostMapping("/insert")
-    public ResponseEntity<ChatLogs> insert(@RequestBody ChatLogs image) {
-        chatLogsService.insert(image);
-        return ResponseEntity.status(201).body(image);
+    public ResponseEntity<ChatLogs> insert(@RequestBody ChatLogs chatLog) {
+        // 현재 시간 설정
+
+        System.out.println("inputed : " + chatLog);
+        chatLogsService.insert(chatLog);
+        return ResponseEntity.status(201).body(chatLog);
     }
 
     @PutMapping("/update/{id}")
