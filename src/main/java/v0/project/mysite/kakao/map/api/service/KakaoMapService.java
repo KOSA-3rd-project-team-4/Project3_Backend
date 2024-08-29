@@ -28,9 +28,9 @@ public class KakaoMapService {
                         .title(e.getTitle())
                         .contents(e.getContents())
                         .salary(e.getSalary())
-                        .dayOfWork(e.getDay_of_work().toLocalDateTime().toLocalDate())
-                        .startWorkTime(e.getStart_work_time().toLocalDateTime().toLocalTime())
-                        .endWorkTime(e.getEnd_work_time().toLocalDateTime().toLocalTime())
+                        .dayOfWork(e.getDay_of_work())
+                        .startWorkTime(e.getStart_work_time())
+                        .endWorkTime(e.getEnd_work_time())
                         .latitude(e.getWork_pos_latitude())
                         .longitude(e.getWork_pos_longitude())
                         .build())
@@ -53,14 +53,6 @@ public class KakaoMapService {
         double deltaLon = radius / (EARTH_RADIUS_KM * Math.cos(latRad));
         double minLng = lng - Math.toDegrees(deltaLon);
         double maxLng = lng + Math.toDegrees(deltaLon);
-
-        System.out.println("origin lat = " + lat);
-        System.out.println("origin lng = " + lng);
-
-        System.out.println("minLng = " + minLng);
-        System.out.println("maxLng = " + maxLng);
-        System.out.println("minLat = " + minLat);
-        System.out.println("maxLat = " + maxLat);
 
         return AnnouncementRequestDTO.builder()
                 .fromLatitude(minLat)
