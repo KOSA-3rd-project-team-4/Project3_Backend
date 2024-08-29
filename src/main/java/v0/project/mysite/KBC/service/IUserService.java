@@ -9,5 +9,5 @@ import java.util.List;
 
 public interface IUserService {
    BizMembers getBizMembers(Authentication authentication);
-   List<Members> selectAll();
+
 }
