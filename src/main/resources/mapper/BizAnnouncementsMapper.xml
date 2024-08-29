@@ -31,14 +31,17 @@
         SELECT * FROM BizAnnouncements
     </select>
 
-    <insert id="insert" parameterType="v0.project.mysite.work.HJH.model.Image">
-        INSERT INTO BizAnnouncements (bizmember_id, title, contents, salary, day_of_work, start_work_time, end_work_time,
-                                      recruit_condition, work_pos_latitude, work_pos_longitude, location_description, announcement_finished)
-        VALUES (#{bizmember_id}, #{title}, ${contents}, ${salary}, ${day_of_work}, ${start_work_time}, ${end_work_time},
-                #{recruit_condition}, #{work_pos_latitude}, ${work_pos_longitude}, ${location_description}, ${announcement_finished})
+    <insert id="insert" parameterType="v0.project.mysite.work.HJH.model.BizAnnouncement">
+        INSERT INTO BizAnnouncements (
+            bizmember_id, title, contents, salary, day_of_work, start_work_time, end_work_time,
+            recruit_condition, work_pos_latitude, work_pos_longitude, location_description, announcement_finished
+        ) VALUES (
+                     #{bizmember_id}, #{title}, #{contents}, #{salary}, #{day_of_work}, #{start_work_time}, #{end_work_time},
+                     #{recruit_condition}, #{work_pos_latitude}, #{work_pos_longitude}, #{location_description}, #{announcement_finished}
+                 )
     </insert>
 
-    <update id="update" parameterType="v0.project.mysite.work.HJH.model.Image">
+    <update id="update" parameterType="v0.project.mysite.work.HJH.model.BizAnnouncement">
         UPDATE BizAnnouncements
         SET bizmember_id = #{bizmember_id}, title = #{title}, contents = #{contents}, salary = #{salary}, day_of_work = #{day_of_work}, start_work_time = #{start_work_time}, end_work_time = #{end_work_time},
             recruit_condition = #{bizmember_id}, work_pos_latitude = #{work_pos_latitude}, work_pos_longitude = #{work_pos_longitude}, location_description = #{location_description}, announcement_finished = #{announcement_finished}
@@ -48,4 +51,8 @@
     <delete id="delete" parameterType="int">
         DELETE FROM BizAnnouncements WHERE announcement_id = #{announcement_id}
     </delete>
+
+    <select id="selectUser" resultMap="BizAnnouncementResultMap">
+        SELECT * FROM BizAnnouncements WHERE bizmember_id = #{bizmember_id}
+    </select>
 </mapper>
