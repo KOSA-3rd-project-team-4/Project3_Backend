@@ -14,10 +14,6 @@
         <result property="edit_date" column="edit_date"/>
     </resultMap>
 
-    <select id="selectByUsername" resultMap="MemberResultMap">
-        SELECT * FROM Members WHERE nick_name = #{nick_name}
-    </select>
-
     <select id="selectById" resultMap="MemberResultMap">
         SELECT * FROM Members WHERE member_id = #{member_id}
     </select>
@@ -28,7 +24,7 @@
 
     <insert id="insert" parameterType="v0.project.mysite.work.HJH.model.Members">
         INSERT INTO Members (nick_name, password, email, image_id, email_verified, edit_date)
-        VALUES (#{nick_name}, #{password}, #{email}, #{image_id}, #{email_verified}, #{edit_date})
+        VALUES (#{nick_name}, #{password}, ${email}, ${image_id}, ${email_verified}, ${edit_date})
     </insert>
 
     <update id="update" parameterType="v0.project.mysite.work.HJH.model.Members">

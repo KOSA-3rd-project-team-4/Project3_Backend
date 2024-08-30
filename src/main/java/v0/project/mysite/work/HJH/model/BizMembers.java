@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.sql.Timestamp;
-import java.time.LocalDate;
 
 @Data
 @Getter @Setter
@@ -14,7 +13,7 @@ public class BizMembers {
     private String username;
     private String password;
     private String email;
-    private Long bizrno;
+    private int bizrno;
     private String address;
     private String bizname;
     private String call_number;
@@ -22,5 +21,5 @@ public class BizMembers {
     private float base_latitude;
     private float base_longitude;
     private int image_id;
-    private LocalDate date_joined;
+    private Timestamp date_joined;
 }

@@ -34,7 +34,7 @@ public class AppliesController {
     @PostMapping("/insert")
     public ResponseEntity<Applies> insert(@RequestBody Applies image) {
         appliesService.insert(image);
-        return ResponseEntity.status(200).body(image);
+        return ResponseEntity.status(201).body(image);
     }
 
     @PutMapping("/update/{id}")
@@ -47,19 +47,6 @@ public class AppliesController {
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> delete(@PathVariable int id) {
         appliesService.delete(id);
-        return ResponseEntity.noContent().build();
-    }
-
-    @PutMapping("/update/chat/{chat_created}/{id}")
-    public ResponseEntity<Void> updateChat(@PathVariable int chat_created, @PathVariable int id) {
-        appliesService.updateChatCreated(chat_created, id);
-//        System.out.println(chat_created + " " + id);
-        return ResponseEntity.noContent().build();
-    }
-
-    @PutMapping("/update/hired/{user_hired}/{id}")
-    public ResponseEntity<Void> updateHired(@PathVariable int user_hired, @PathVariable int id) {
-        appliesService.updateUserHired(user_hired, id);
         return ResponseEntity.noContent().build();
     }
 }

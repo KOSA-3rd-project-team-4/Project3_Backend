@@ -9,7 +9,4 @@ import v0.project.mysite.work.HJH.model.Image;
 @Qualifier("appliesMapper")
 public interface AppliesMapper extends BaseMapper<Applies, Integer>{
     // 필요시 ImageMapper에 특화된 메서드를 추가할 수 있습니다.
-    void updateChatCreated(int chat_created, int apply_id);
-
-    void updateUserHired(int user_hired, int apply_id);
 }

@@ -40,10 +40,7 @@ public class MembersController {
 
     @PutMapping("/update/{id}")
     public ResponseEntity<Void> update(@PathVariable int id, @RequestBody Members members) {
-        members.setMember_id(id);
-        if(members.getPassword() == null || members.getPassword().isEmpty()) {
-            members.setPassword("1");
-        }
+        members.setImage_id(id);
         membersService.update(members);
         return ResponseEntity.noContent().build();
     }

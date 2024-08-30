@@ -9,6 +9,5 @@ import java.util.List;
 @Mapper
 @Qualifier("membersMapper")
 public interface MembersMapper extends BaseMapper<Members, Integer> {
-    Members selectByUsername(String nick_name);
     // 필요시 MembersMapper에 특화된 메서드를 추가할 수 있습니다.
 }

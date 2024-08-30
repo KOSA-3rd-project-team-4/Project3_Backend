@@ -7,8 +7,8 @@
     <resultMap id="ChatLogsResultMap" type="v0.project.mysite.work.HJH.model.ChatLogs">
         <id property="chat_log_id" column="chat_log_id"/>
         <result property="contract_chat_id" column="contract_chat_id"/>
-        <result property="sent_by_member_id" column="sent_by_member_id"/>
-        <result property="sent_by_biz_member_id" column="sent_by_biz_member_id"/>
+        <result property="is_biz_member" column="is_biz_member"/>
+        <result property="sent_by" column="sent_by"/>
         <result property="content" column="content"/>
         <result property="chat_time" column="chat_time"/>
     </resultMap>
@@ -22,15 +22,8 @@
     </select>
 
     <insert id="insert" parameterType="v0.project.mysite.work.HJH.model.ChatLogs">
-        INSERT INTO ChatLogs (contract_chat_id, sent_by_member_id, sent_by_biz_member_id, content, chat_time)
-        VALUES (#{contract_chat_id}, #{sent_by_member_id},
-                <if test="sent_by_biz_member_id != null">
-                    ${sent_by_biz_member_id},
-                </if>
-                <if test="sent_by_biz_member_id == null">
-                    NULL,
-                </if>
-                ${content}, NOW())
+        INSERT INTO ChatLogs (contract_chat_id, is_biz_member, sent_by, content, chat_time)
+        VALUES (#{contract_chat_id}, #{is_biz_member}, ${sent_by}, ${content}, ${chat_time})
     </insert>
 
     <update id="update" parameterType="v0.project.mysite.work.HJH.model.ChatLogs">
