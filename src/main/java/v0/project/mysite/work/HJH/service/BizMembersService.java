@@ -1,17 +1,13 @@
 package v0.project.mysite.work.HJH.service;
 
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import v0.project.mysite.work.HJH.mapper.BizMembersMapper;
-import v0.project.mysite.work.HJH.mapper.ImageMapper;
 import v0.project.mysite.work.HJH.model.BizMembers;
-import v0.project.mysite.work.HJH.model.Image;
 
 @Service
-public class BizMembersService extends BaseServiceImpl<BizMembers, Integer>{
+public class BizMembersService extends BaseServiceImpl<BizMembers, Integer> {
 
     private final BizMembersMapper bizMembersMapper;
     private final PasswordEncoder passwordEncoder;
