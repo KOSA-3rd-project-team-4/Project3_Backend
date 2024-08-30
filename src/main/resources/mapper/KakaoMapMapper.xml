@@ -1,0 +1,27 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="v0.project.mysite.kakao.map.api.dao.KakaoMapMapper">
+
+    <resultMap id="locationResultMap" type="v0.project.mysite.work.HJH.model.BizAnnouncement">
+        <id property="announcement_id" column="announcement_id"/>
+        <result property="title" column="title"/>
+        <result property="contents" column="contents"/>
+        <result property="salary" column="salary"/>
+        <result property="day_of_work" column="day_of_work"/>
+        <result property="start_work_time" column="start_work_time"/>
+        <result property="end_work_time" column="end_work_time"/>
+        <result property="work_pos_latitude" column="work_pos_latitude"/>
+        <result property="work_pos_longitude" column="work_pos_longitude"/>
+    </resultMap>
+
+    <select id="findAnnouncementsByRange" parameterType="v0.project.mysite.kakao.map.api.dto.AnnouncementRequestDTO" resultMap="locationResultMap"><![CDATA[
+        SELECT announcement_id, title, contents, salary, day_of_work, start_work_time, end_work_time, work_pos_latitude, work_pos_longitude
+        FROM BizAnnouncements
+        WHERE work_pos_latitude > #{fromLatitude}
+        AND work_pos_latitude < #{toLatitude}
+        AND work_pos_longitude > #{fromLongitude}
+        AND work_pos_longitude < #{toLongitude}
+    ]]></select>
+</mapper>

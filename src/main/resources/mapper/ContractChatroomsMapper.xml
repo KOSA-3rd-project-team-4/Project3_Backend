@@ -20,7 +20,7 @@
 
     <insert id="insert" parameterType="v0.project.mysite.work.HJH.model.ContractChatrooms">
         INSERT INTO ContractChatrooms (apply_id, room_opening_time)
-        VALUES (#{apply_id}, #{room_opening_time})
+        VALUES (#{apply_id}, NOW())
     </insert>
 
     <update id="update" parameterType="v0.project.mysite.work.HJH.model.ContractChatrooms">

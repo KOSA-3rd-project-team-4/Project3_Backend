@@ -1,0 +1,78 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="v0.project.mysite.KBC.repository.MainpageMapper">
+
+    <resultMap id="MainAnnounceResultMap" type="v0.project.mysite.KBC.DTO.MainAnnounce">
+        <result property="announcement_id" column="announcement_id"/>
+        <result property="title" column="title"/>
+        <result property="contents" column="contents"/>
+        <result property="salary" column="salary"/>
+        <result property="location_description" column="location_description"/>
+        <result property="bizname" column="bizname"/>
+    </resultMap>
+
+    <resultMap id="MainAnTagResultMap" type="v0.project.mysite.KBC.DTO.MainAnTag">
+        <result property="announcement_id" column="announcement_id"/>
+        <result property="tagname" column="name"/>
+    </resultMap>
+
+    <resultMap id="MainResumeResultMap" type="v0.project.mysite.KBC.DTO.MainResume">
+        <result property="pr_id" column="pr_id"/>
+        <result property="title" column="title"/>
+        <result property="nick_name" column="nick_name"/>
+    </resultMap>
+
+    <resultMap id="MainResumeTagResultMap" type="v0.project.mysite.KBC.DTO.MainResumeTag">
+        <result property="pr_id" column="pr_id"/>
+        <result property="tag" column="tag"/>
+    </resultMap>
+
+    <resultMap id="TagResultMap" type="v0.project.mysite.KBC.DTO.AllTag">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+    </resultMap>
+
+    <select id="joblist" resultMap="MainAnnounceResultMap">
+        SELECT
+        ba.announcement_id,
+        ba.title,
+        ba.contents,
+        ba.salary,
+        ba.location_description,
+        bm.bizname
+        FROM
+        BizAnnouncements ba
+        JOIN
+        BizMembers bm
+        ON
+        ba.bizmember_id = bm.bizmember_id;
+    </select>
+
+    <select id="taglist" resultMap="MainAnTagResultMap">
+        SELECT
+        tl.announcement_id,
+        tg.name
+        FROM
+        TagLists tl
+        JOIN
+        tag tg
+        ON
+        tg.id = tl.tag_filter_id;
+    </select>
+
+    <select id="resumeList" resultMap="MainResumeResultMap">
+        select pr.title, m.nick_name, pr.pr_id
+        from Members_PR pr
+        JOIN Members m on m.member_id = pr.member_id;
+    </select>
+
+    <select id="resumeTagList" resultMap="MainResumeTagResultMap">
+        select * from pr_tag;
+    </select>
+
+    <select id="alltag" resultMap="TagResultMap">
+        select * from tag;
+    </select>
+</mapper>
