@@ -2,6 +2,7 @@ package v0.project.mysite.work.HJH.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import v0.project.mysite.KBC.DTO.MainAnnounce;
 import v0.project.mysite.work.HJH.model.BizAnnouncement;
 import v0.project.mysite.work.HJH.model.Image;
 import v0.project.mysite.work.HJH.service.BizAnnouncementService;
@@ -49,13 +50,20 @@ public class BizAnnouncementController {
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> delete(@PathVariable int id) {
-        bizAnnouncementService.delete(id);
+        bizAnnouncementService.deleteAnnouncement(id);
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/select/user")
-    public ResponseEntity<List<BizAnnouncement>> selectUser() {
-        List<BizAnnouncement> images = bizAnnouncementService.selectUser();
+    @GetMapping("/select/user/{id}")
+    public ResponseEntity<List<BizAnnouncement>> selectUser(@PathVariable int id) {
+        List<BizAnnouncement> images = bizAnnouncementService.selectUser(id);
         return ResponseEntity.ok(images);
     }
+
+    @GetMapping("/select/muser/{id}")
+    public ResponseEntity<List<BizAnnouncement>> selectMUser(@PathVariable int id) {
+        List<BizAnnouncement> images = bizAnnouncementService.selectMUser(id);
+        return ResponseEntity.ok(images);
+    }
+
 }

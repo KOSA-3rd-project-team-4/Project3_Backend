@@ -125,10 +125,8 @@ public class MembersPRService{
         membersPRMapper.delete(id);
     }
 
-    public List<NewMembersPR> selectUser() {
-        int user_id = 1;
-        return membersPRMapper.selectUser(user_id);
-        //return membersPRMapper.selectAll();
+    public List<NewMembersPR> selectUser(int id) {
+        return membersPRMapper.selectUser(id);
     }
 
     //public

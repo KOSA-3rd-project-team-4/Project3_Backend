@@ -30,10 +30,14 @@
         SELECT * FROM BizMembers WHERE username = #{query}
     </select>
 
-    <insert id="insertUser" parameterType="v0.project.mysite.KBC.DTO.TestBiz">
-        INSERT INTO TestBiz (id, username, password)
-        VALUES (#{id}, #{username}, #{password})
-    </insert>
+    <select id="selectAll" resultMap="BizMembersResultMap">
+        SELECT * FROM BizMembers
+    </select>
+
+<!--    <insert id="insertUser" parameterType="v0.project.mysite.KBC.DTO.TestBiz">-->
+<!--        INSERT INTO TestBiz (id, username, password)-->
+<!--        VALUES (#{id}, #{username}, #{password})-->
+<!--    </insert>-->
 
 
 </mapper>
