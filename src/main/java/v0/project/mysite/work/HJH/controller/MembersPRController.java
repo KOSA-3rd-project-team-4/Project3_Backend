@@ -33,11 +33,9 @@ public class MembersPRController {
         return ResponseEntity.ok(membersPR);
     }
 
-    @PostMapping("/insert")
-    public ResponseEntity<String> insert(@RequestBody MPR membersPR) {
-        int user_id = 1;
-        System.out.println("확인용");
-        membersPRService.insert(membersPR, user_id);
+    @PostMapping("/insert/{id}")
+    public ResponseEntity<String> insert(@PathVariable int id, @RequestBody MPR membersPR) {
+        membersPRService.insert(membersPR, id);
         return ResponseEntity.ok("Resume saved successfully");
     }
 

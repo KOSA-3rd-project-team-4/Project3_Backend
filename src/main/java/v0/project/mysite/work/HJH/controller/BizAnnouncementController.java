@@ -32,11 +32,9 @@ public class BizAnnouncementController {
         return ResponseEntity.ok(images);
     }
 
-    @PostMapping("/insert")
-    public ResponseEntity<BizAnnouncement> insert(@RequestBody BizAnnouncement image) {
-        System.out.println(image.getBizmember_id());
-        int user_id = 1;
-        image.setBizmember_id(user_id);
+    @PostMapping("/insert/{id}")
+    public ResponseEntity<BizAnnouncement> insert(@PathVariable int id, @RequestBody BizAnnouncement image) {
+        image.setBizmember_id(id);
         bizAnnouncementService.insert(image);
         return ResponseEntity.status(201).body(image);
     }
@@ -56,6 +54,7 @@ public class BizAnnouncementController {
 
     @GetMapping("/select/user/{id}")
     public ResponseEntity<List<BizAnnouncement>> selectUser(@PathVariable int id) {
+        System.out.println(id);
         List<BizAnnouncement> images = bizAnnouncementService.selectUser(id);
         return ResponseEntity.ok(images);
     }
