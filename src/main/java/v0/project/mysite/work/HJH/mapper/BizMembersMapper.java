@@ -12,8 +12,13 @@ import v0.project.mysite.work.HJH.model.Image;
 @Qualifier("bizMembersMapper")
 public interface BizMembersMapper extends BaseMapper<BizMembers, Integer>{
     // 필요시 ImageMapper에 특화된 메서드를 추가할 수 있습니다.
+    @Select("SELECT * FROM BizMembers WHERE email = #{email}")
+    BizMembers findByEmail(String email);
 
     @Select("SELECT * FROM BizMembers WHERE username = #{username}")
     BizMembers findByUsername(String username);
+
+    @Select("SELECT * FROM BizMembers WHERE username = #{username} AND email = #{email}")
+    BizMembers findByUsernameAndEmail(String username, String email);
 
 }
