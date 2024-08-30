@@ -12,4 +12,5 @@ import java.util.List;
 public interface ViewChatMapper {
     List<ViewChat> selectById(int id);
 
+    void updateUserHired(int contract_chat_id, int hire);
 }

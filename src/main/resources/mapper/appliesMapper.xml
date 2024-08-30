@@ -23,7 +23,7 @@
 
     <insert id="insert" parameterType="v0.project.mysite.work.HJH.model.Applies">
         INSERT INTO applies (member_id, announcement_id, chat_created, user_hired, apply_date)
-        VALUES (#{member_id}, #{announcement_id}, ${chat_created}, ${user_hired}, ${apply_date})
+        VALUES (#{member_id}, #{announcement_id}, ${chat_created}, ${user_hired}, NOW())
     </insert>
 
     <update id="update" parameterType="v0.project.mysite.work.HJH.model.Applies">
