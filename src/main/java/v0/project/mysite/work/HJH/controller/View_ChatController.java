@@ -1,10 +1,7 @@
 package v0.project.mysite.work.HJH.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import v0.project.mysite.work.HJH.model.ViewAnnouncement;
 import v0.project.mysite.work.HJH.model.ViewChat;
 import v0.project.mysite.work.HJH.service.ViewAnnouncementsService;
@@ -22,5 +19,10 @@ public class View_ChatController {
     @GetMapping("/select/{id}")
     public List<ViewChat> selectById(@PathVariable int id) {
         return vcService.selectById(id);
+    }
+
+    @PutMapping("/update/hire/{contract_chat_id}/{hire}")
+    public void updateUserHired(@PathVariable int contract_chat_id, @PathVariable int hire) {
+        vcService.updateUserHired(contract_chat_id, hire);
     }
 }

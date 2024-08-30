@@ -29,4 +29,12 @@
                  LEFT JOIN BizMembers bm ON cl.sent_by_biz_member_id = bm.bizmember_id
         WHERE cl.contract_chat_id = #{id};
     </select>
+
+    <update id="updateUserHired" parameterType="v0.project.mysite.work.HJH.model.Applies">
+        update applies a
+            inner join ContractChatrooms cc
+        on a.apply_id = cc.apply_id
+            set a.user_hired = #{hire}
+        WHERE cc.contract_chat_id = #{contract_chat_id}
+    </update>
 </mapper>

@@ -18,4 +18,8 @@ public class ViewChatService {
     public List<ViewChat> selectById(int id) {
         return this.vcMapper.selectById(id);
     }
+
+    public void updateUserHired(int contract_chat_id, int hire) {
+        this.vcMapper.updateUserHired(contract_chat_id, hire);
+    }
 }
