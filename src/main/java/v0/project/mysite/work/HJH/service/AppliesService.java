@@ -6,9 +6,6 @@ import v0.project.mysite.work.HJH.mapper.AppliesMapper;
 import v0.project.mysite.work.HJH.mapper.ImageMapper;
 import v0.project.mysite.work.HJH.model.Applies;
 import v0.project.mysite.work.HJH.model.Image;
-import v0.project.mysite.work.HJH.model.ViewAnnouncement;
-
-import java.util.List;
 
 @Service
 public class AppliesService extends BaseServiceImpl<Applies, Integer>{
@@ -21,11 +18,4 @@ public class AppliesService extends BaseServiceImpl<Applies, Integer>{
     }
 
     // 필요시 ImageService에 특화된 메서드를 추가할 수 있습니다.
-    public void updateChatCreated(int chat_created, int apply_id) {
-        appliesMapper.updateChatCreated(chat_created, apply_id);
-    }
-
-    public void updateUserHired(int user_hired, int apply_id) {
-        appliesMapper.updateUserHired(user_hired, apply_id);
-    }
 }
